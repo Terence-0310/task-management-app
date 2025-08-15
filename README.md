@@ -1,70 +1,260 @@
-# Getting Started with Create React App
+# Task Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Ứng dụng quản lý công việc (Task Manager) xây dựng bằng **React (Vite)** và **JSON Server**.
+Hỗ trợ đăng nhập, xem/thêm/sửa/xoá nhiệm vụ, gán ưu tiên, danh mục, ngày hạn và cập nhật trạng thái.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Demo
 
-### `npm start`
+- **Website (Vercel):** <https://task-management-app-gamma-three.vercel.app>
+- **API (Render):** <https://task-management-app-nzra.onrender.com>
+- **Proxy tại FE:** mọi request dùng `/api/...` (Vercel serverless proxy sang Render).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Tài khoản demo
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Admin:** `admin / 123456`
+- **User:** `user / 123456`
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Tính năng
 
-### `npm run build`
+- 🔐 **Authentication** (Login/Logout)
+- ✅ **CRUD Tasks**: tạo, cập nhật, xoá, đổi trạng thái
+- 🏷️ **Danh mục (Categories)** & **độ ưu tiên**
+- 📅 **Due date** + trạng thái: Chờ xử lý / Đang thực hiện / Hoàn thành
+- 🧪 **Form validation** cơ bản
+- 📱 **Responsive UI/UX** (mobile / tablet / desktop)
+- 🌙 **(Tuỳ chọn)** Dark mode qua CSS `prefers-color-scheme`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Kiến trúc & Công nghệ
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **React 18 + Vite**
+- **TypeScript**
+- **JSON Server** (mock API)
+- **Vercel** (FE + serverless function **/api** proxy)
+- **Render** (host JSON Server)
+- **CSS/utility styles** (+ có thể Styled Components/Tailwind nếu cấu hình)
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Cấu trúc thư mục
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+task-management-app/
+├── README.md
+├── package.json
+├── vercel.json
+├── db.json
+├── api/
+│ └── [...path].js # Serverless /api/\* → Render
+├── public/ # static assets
+├── src/
+│ ├── main.tsx
+│ ├── App.tsx
+│ ├── pages/
+│ │ ├── LoginPage.tsx
+│ │ ├── TasksPage.tsx
+│ │ └── CategoriesPage.tsx
+│ ├── modules/
+│ │ └── auth/ # AuthContext, hooks…
+│ ├── services/
+│ │ ├── http.ts # API_URL lấy từ VITE_API_URL (mặc định /api)
+│ │ ├── usersAPI.ts
+│ │ └── tasksAPI.ts
+│ └── styles/ # CSS
+└── screenshots/
+├── login.png
+├── dashboard.png
+├── task-form.png
+└── mobile.png
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+> **Lưu ý:** thư mục `api/` phải ở **root** để Vercel build serverless function.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## Cài đặt & Chạy dự án (Local)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Yêu cầu
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Node.js ≥ 18**
+- **npm** hoặc **yarn**
 
-### Code Splitting
+### Cài đặt
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+git clone <repo-url>
+cd task-management-app
+npm install
+```
 
-### Analyzing the Bundle Size
+### Chạy local (2 terminal)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+# Terminal 1: JSON Server (port 3001)
+npm run server
+# hoặc:
+# json-server --watch db.json --port 3001
 
-### Making a Progressive Web App
+# Terminal 2: React app (Vite)
+npm run dev
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Mặc định FE gọi `/api`. Khi chạy local (không có function proxy), bạn có 2 lựa chọn:
 
-### Advanced Configuration
+1. Tạo `.env.local`:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+   ```bash
+   VITE_API_URL=http://localhost:3001
+   ```
 
-### Deployment
+2. Hoặc tự setup reverse-proxy `/api` tương ứng.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## Build & Deploy
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. **FE (Vercel)**
+
+   - Kết nối GitHub → Import project.
+   - **Build command:** `npm run build`
+   - **Output directory:** `dist`
+   - **Environment Variables:**
+     - `VITE_API_URL = /api`
+     - `RENDER_API_URL = https://task-management-app-nzra.onrender.com`
+   - `vercel.json` (tránh 404 khi refresh SPA):
+
+     ```json
+     {
+       "cleanUrls": true,
+       "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+     }
+     ```
+
+2. **API (Render)**
+
+   - Service Node + `json-server`
+   - `package.json`:
+
+     ```json
+     {
+       "scripts": {
+         "start": "json-server --host 0.0.0.0 --watch db.json --port $PORT"
+       },
+       "dependencies": {
+         "json-server": "^0.17.4"
+       }
+     }
+     ```
+
+   - Deploy và lấy **External URL**: `https://task-management-app-nzra.onrender.com`
+
+---
+
+## Biến môi trường
+
+| Key              | Giá trị (Production)                            | Ghi chú                                 |
+| ---------------- | ----------------------------------------------- | --------------------------------------- |
+| `VITE_API_URL`   | `/api`                                          | FE gọi `/api` để proxy qua Vercel       |
+| `RENDER_API_URL` | `https://task-management-app-nzra.onrender.com` | Serverless function forward sang Render |
+
+> Đổi ENV xong cần **Redeploy** Vercel để build nhận giá trị mới.
+
+---
+
+## API mẫu
+
+- `GET /users`
+- `GET /tasks`
+- `POST /tasks`
+- `PATCH /tasks/:id`
+- `DELETE /tasks/:id`
+
+Ví dụ đăng nhập (demo):
+
+```http
+GET /api/users?username=admin&password=123456
+```
+
+---
+
+## Scripts
+
+```json
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "server": "json-server --watch db.json --port 3001"
+  }
+}
+```
+
+---
+
+## Screenshots
+
+Đặt ảnh vào thư mục `screenshots/`:
+
+- `screenshots/login.png`
+- `screenshots/dashboard.png`
+- `screenshots/task-form.png`
+- `screenshots/mobile.png`
+
+Bạn có thể chèn vào README:
+
+```markdown
+![Login](./screenshots/login.png)
+![Dashboard](./screenshots/dashboard.png)
+![Task Form](./screenshots/task-form.png)
+![Mobile](./screenshots/mobile.png)
+```
+
+---
+
+## Submission Checklist
+
+- [ ] Tất cả chức năng **CRUD** hoạt động
+- [ ] **Authentication** chạy ổn
+- [ ] **Form validation** đầy đủ
+- [ ] **Responsive** trên mobile/desktop
+- [ ] **Error handling** hợp lý
+- [ ] **Code clean** & organized
+- [ ] **Advance feature** (nếu có) hoạt động
+- [ ] **Deploy** thành công (Vercel + Render)
+- [ ] **README.md** đầy đủ
+- [ ] **Screenshots** đính kèm
+
+---
+
+## Bonus Points (tối đa +5)
+
+- Dark/Light theme toggle **(+1)**
+- i18n – English/Vietnamese **(+2)**
+- PWA features **(+2)**
+- Unit tests (Jest/React Testing Library) **(+3)**
+- Custom animations (CSS/Framer Motion) **(+1)**
+
+---
+
+## Troubleshooting
+
+- **`/api/*` trên Vercel trả 404** → thiếu `api/[...path].js` ở **root** hoặc chưa redeploy.
+- **FE vẫn gọi `https://<task-api>`** → sửa `VITE_API_URL=/api` và **dùng** `API_URL` trong code, không hard-code; redeploy lại.
+- **Render 404** → kiểm tra `db.json` và script `start`, redeploy Render.
+
+---
+
+## Tác giả
+
+- **Học viên:** _Nguyễn Đức Anh Tài_
+- **Liên hệ:** _anhtai9712@gmail.com_
+
+---
+
+## License
+
+MIT
