@@ -1,0 +1,35 @@
+{
+  "users": [
+    { "id": 1, "username": "admin", "password": "123456", "role": "admin" },
+    { "id": 2, "username": "user", "password": "123456", "role": "user" }
+  ],
+  "categories": [
+    { "id": 1, "name": "Công việc", "color": "#0ea5e9" },
+    { "id": 2, "name": "Học tập", "color": "#22c55e" },
+    { "id": 3, "name": "Cá nhân", "color": "#f59e0b" }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Setup JSON Server",
+      "description": "Cấu hình db.json cho project",
+      "status": "in-progress",
+      "priority": "medium",
+      "categoryId": 1,
+      "dueDate": "2025-08-18",
+      "createdAt": "2025-08-10T10:00:00.000Z",
+      "createdBy": 1
+    },
+    {
+      "id": 2,
+      "title": "Học React Hooks",
+      "description": "Hoàn thành useState/useEffect",
+      "status": "pending",
+      "priority": "high",
+      "categoryId": 2,
+      "dueDate": "2025-08-20",
+      "createdAt": "2025-08-11T10:00:00.000Z",
+      "createdBy": 1
+    }
+  ]
+}

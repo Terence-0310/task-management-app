@@ -1,0 +1,416 @@
+/* ===== TOPBAR ===== */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: saturate(1.2) blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 16px;
+}
+.topbar .left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.brand-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+.brand-text strong {
+  font-weight: 700;
+}
+.brand-text span {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+}
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #f8fafc;
+  color: #1e293b;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+.tab:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+.tab.active {
+  background: var(--primary-100);
+  border-color: #cfe0ff;
+}
+
+/* Right side */
+.welcome {
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.role-admin {
+  background: #e0e7ff;
+  border: 1px solid #c7d2fe;
+  color: #3730a3;
+  border-radius: 999px;
+  padding: 2px 8px;
+  margin-left: 6px;
+}
+.role-user {
+  background: #e2f5ff;
+  border: 1px solid #bae6fd;
+  color: #0c4a6e;
+  border-radius: 999px;
+  padding: 2px 8px;
+  margin-left: 6px;
+}
+
+/* ===== PAGE HEADER ===== */
+.page-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 18px 0 14px;
+}
+.page-title-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.page-title h2 {
+  font-size: 22px;
+}
+.page-title span {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* ===== GRID (1-2-3 columns) ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 22px;
+}
+.grid > .card {
+  grid-column: span 12;
+}
+@media (min-width: 720px) {
+  .grid > .card {
+    grid-column: span 6;
+  }
+}
+@media (min-width: 1100px) {
+  .grid > .card {
+    grid-column: span 4;
+  }
+}
+
+/* ===== FORM: ONE LINE (responsive) ===== */
+.form-card {
+  padding: 16px;
+}
+.form-title {
+  margin: 4px 0 12px;
+  font-size: 15px;
+  color: var(--muted);
+}
+.form-inline {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 2fr 3fr 1.2fr 1.2fr 1.4fr auto;
+  align-items: center;
+}
+.form-inline .btn-add {
+  padding: 0 18px;
+}
+@media (max-width: 1100px) {
+  .form-inline {
+    grid-template-columns: 1.6fr 2.4fr 1fr 1fr 1.2fr;
+  }
+  .form-inline .btn-add {
+    grid-column: 1 / -1;
+    justify-self: end;
+  }
+}
+@media (max-width: 760px) {
+  .form-inline {
+    grid-template-columns: 1fr;
+  }
+  .form-inline .btn-add {
+    justify-self: stretch;
+  }
+}
+.date-wrap {
+  position: relative;
+}
+.date-input {
+  padding-right: 10px;
+}
+.date-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.6;
+}
+
+/* ===== CARDS ===== */
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.card-title {
+  font-size: 18px;
+  margin: 0;
+}
+.card-desc {
+  color: var(--muted);
+  line-height: 1.6;
+}
+.meta {
+  display: grid;
+  gap: 8px;
+  margin-top: 6px;
+}
+.meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.meta-row span:first-child {
+  color: var(--muted);
+}
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 10px 0;
+}
+.card-actions {
+  margin-top: 12px;
+}
+
+/* Hover elevate cho task-card */
+.task-card {
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+.task-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(2, 8, 23, 0.12);
+}
+
+/* ===== SKELETON ===== */
+.skeleton .s-line {
+  height: 12px;
+  background: linear-gradient(90deg, #eef2f7, #f6f8fb, #eef2f7);
+  background-size: 200% 100%;
+  border-radius: 8px;
+  margin: 10px 0;
+  animation: shimmer 1.2s ease-in-out infinite;
+}
+.skeleton .w-60 {
+  width: 60%;
+}
+.skeleton .w-80 {
+  width: 80%;
+}
+.skeleton .w-40 {
+  width: 40%;
+}
+.skeleton .w-70 {
+  width: 70%;
+}
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ===== AUTH (login) ===== */
+.auth-card {
+  width: min(480px, 92vw);
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 26px 22px;
+  box-shadow: 0 20px 60px rgba(2, 8, 23, 0.25);
+}
+.auth-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, #e0e7ff, #c7d2fe);
+  color: #1e40af;
+  margin: 0 auto 8px;
+}
+.form {
+  display: grid;
+  gap: 10px;
+}
+.label {
+  font-weight: 600;
+}
+.error {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+  padding: 8px 10px;
+  border-radius: 10px;
+}
+
+/* ===== Tiny helpers ===== */
+.mr-8 {
+  margin-right: 8px;
+}
+.mr-12 {
+  margin-right: 12px;
+}
+/* ==== Topbar & Tabs nhiều màu hơn ==== */
+.topbar {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.78)),
+    radial-gradient(600px 200px at 0% 0%, #eff6ff 0, transparent 60%);
+}
+.tab.active {
+  color: #fff;
+  border-color: transparent;
+  background: linear-gradient(180deg, var(--primary-500), var(--primary-600));
+  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.25);
+}
+
+/* ==== Form card viền gradient nhẹ ==== */
+.form-card {
+  background: linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(120deg, #c7d2fe, #bae6fd) border-box;
+  border: 1px solid transparent;
+  box-shadow: 0 10px 26px rgba(2, 8, 23, 0.06);
+}
+
+/* ==== Task card có màu theo status ==== */
+.task-card {
+  position: relative;
+  overflow: hidden;
+}
+.task-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.55;
+  background: radial-gradient(
+    120% 80% at -10% -20%,
+    color-mix(in srgb, var(--accent) 12%, transparent),
+    transparent 60%
+  );
+}
+.task-card {
+  border-left: 6px solid var(--accent);
+}
+.task-card.status-todo {
+  --accent: var(--warn);
+} /* Cam */
+.task-card.status-in-progress {
+  --accent: var(--info);
+} /* Xanh dương */
+.task-card.status-completed {
+  --accent: var(--success);
+} /* Xanh lá */
+
+/* Nhãn ưu tiên rõ màu hơn */
+.badge-danger {
+  background: #fee2e2;
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+.badge-muted {
+  background: #fff7ed;
+  border-color: #fed7aa;
+  color: #a16207;
+}
+.badge-info {
+  background: #e0f2fe;
+  border-color: #bae6fd;
+  color: #075985;
+}
+
+/* Hạn quá ngày -> đỏ nổi bật */
+.due-overdue {
+  color: var(--danger);
+  font-weight: 700;
+}
+
+/* Nút chính sống động hơn */
+.btn-primary {
+  background: linear-gradient(180deg, var(--primary-500), var(--primary-600));
+  box-shadow: 0 10px 26px rgba(37, 99, 235, 0.28);
+}
+/* Form inline: thêm cột "Danh mục" trước ngày */
+.form-inline.form-inline--with-cat {
+  grid-template-columns: 2fr 3fr 1.2fr 1.2fr 1.6fr 1.4fr auto;
+}
+@media (max-width: 1100px) {
+  .form-inline.form-inline--with-cat {
+    grid-template-columns: 1.6fr 2.2fr 1fr 1fr 1fr 1.2fr;
+  }
+}
+
+/* Chip danh mục */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 12px;
+  line-height: 1;
+  box-shadow: 0 4px 10px rgba(2, 8, 23, 0.06);
+}
+.chip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  opacity: 0.6;
+}
+
+/* Task card màu theo trạng thái (nếu bạn chưa có) */
+.task-card {
+  position: relative;
+  border-left: 6px solid var(--accent);
+}
+.task-card.status-todo {
+  --accent: var(--warn);
+}
+.task-card.status-in-progress {
+  --accent: var(--info);
+}
+.task-card.status-completed {
+  --accent: var(--success);
+}
