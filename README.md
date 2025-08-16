@@ -191,29 +191,8 @@ GET /api/users?username=admin&password=123456
     "server": "json-server --watch db.json --port 3001"
   }
 }
+
 ```
-
----
-
-## Screenshots
-
-Đặt ảnh vào thư mục `screenshots/`:
-
-- `screenshots/login.png`
-- `screenshots/dashboard.png`
-- `screenshots/task-form.png`
-- `screenshots/mobile.png`
-
-Bạn có thể chèn vào README:
-
-```markdown
-![Login](./screenshots/login.png)
-![Dashboard](./screenshots/dashboard.png)
-![Task Form](./screenshots/task-form.png)
-![Mobile](./screenshots/mobile.png)
-```
-
----
 
 ## Submission Checklist
 
@@ -227,16 +206,6 @@ Bạn có thể chèn vào README:
 - [ ] **Deploy** thành công (Vercel + Render)
 - [ ] **README.md** đầy đủ
 - [ ] **Screenshots** đính kèm
-
----
-
-## Bonus Points (tối đa +5)
-
-- Dark/Light theme toggle **(+1)**
-- i18n – English/Vietnamese **(+2)**
-- PWA features **(+2)**
-- Unit tests (Jest/React Testing Library) **(+3)**
-- Custom animations (CSS/Framer Motion) **(+1)**
 
 ---
 
